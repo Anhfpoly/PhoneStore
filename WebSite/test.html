@@ -1,0 +1,356 @@
+<link rel="icon" href="../images/diamond.png">
+<!doctype html>
+<html lang="vi">
+
+<head>
+    <title>Quản lý Thể loại</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link
+        href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i&display=swap&subset=latin-ext,vietnamese"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="container-scroller">
+        <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+            <div class="text-center navbar-brand-wrapper d-flex align-items-top justify-content-center">
+                <a class="navbar-brand brand-logo" href="dashboard.html">
+                    <img src="assets/images/logo-j2team-w.png" alt="logo" id="logo-black">
+                    <img src="assets/images/Logo2.png" alt="logo" id="logo-white"></a>
+                <a class="navbar-brand brand-logo-mini d-none" href="dashboard.html">
+                    <img src="assets/images/logo-j2team-w.png" alt="logo"> </a>
+            </div>
+            <div class="navbar-menu-wrapper d-flex align-items-center">
+                <button class="navbar-toggler navbar-toggler align-self-center" type="button" id="toggleMenu"
+                    data-toggle="minimize">
+                    <i class="fa fa-bars" aria-hidden="true"></i>
+                    <input type="checkbox" id="mini-sidebar" hidden />
+                </button>
+                <ul class="navbar-nav navbar-nav-right">
+                    <li class="nav-item color-setting">
+                        <div class="theme-switch-wrapper">
+                            <span class="d-none d-sm-block">Dark Mode</span>
+                            <label class="theme-switch" for="checkbox">
+                                <input type="checkbox" id="checkbox" />
+                                <div class="slider round"></div>
+                            </label>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown d-none d-xl-inline-block">
+                        <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown"
+                            aria-expanded="false">
+                            <span class="profile-text">Xin chào, John Luu!</span>
+                            <img class="img-xs rounded-circle" src="assets/images/avatar.jpg" alt="Profile image"> </a>
+                        <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
+                            <a class="dropdown-item mt-2"> Quản lý tài khoản </a>
+                            <a class="dropdown-item"> Đổi mật khẩu </a>
+                            <a class="dropdown-item" onclick="logout()"> Đăng xuất </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div class="container-fluid page-body-wrapper">
+            <nav class="sidebar sidebar-offcanvas" id="sidebar">
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="./dashboard.html">
+                            <i class="fa fa-dashboard menu-icon" aria-hidden="true"></i>
+                            <span class="menu-title">Bảng tin</span>
+                        </a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="./categories.html">
+                            <i class="fa fa-server menu-icon" aria-hidden="true"></i>
+                            <span class="menu-title">Thể loại</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./products.html">
+                            <i class="fa fa-book menu-icon" aria-hidden="true"></i>
+                            <span class="menu-title">Sản phẩm</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="main-panel">
+                <div class="content-wrapper">
+                    <div class="row mb-3">
+                        <div class="col-md-12 d-md-flex justify-content-md-between">
+                            <h3>Quản lý thể loại</h3>
+                            <button type="button" class="btn btn-primary" data-toggle="modal"
+                                data-target="#add-category">
+                                Thêm thể loại
+                            </button>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table" id="tbl_category">
+                            <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Mã thể loại</th>
+                                    <th>Tên thể loại</th>
+                                    <th>Mô tả</th>
+                                    <th colspan="2">Công cụ</th>
+                                </tr>
+                            </thead>
+                            <tbody id="data-categories"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="add-category" tabindex="-1" role="dialog" aria-labelledby="add-category"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Thêm thể loại</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <!-- <div class="col-md-3 d-flex align-items-center">
+                                <img src="https://mynukeviet.net/uploads/tai-lieu/2016/cau-hinh-anh-thumbnail-nukeviet_1.png"
+                                    class="img-fluid img-thumbnail" alt="Hình danh mục" id="get-image" />
+                                <input type="file" id="choose-image" accept="image/gif, image/jpeg, image/png"
+                                    onchange="showImage(event)" hidden>
+                            </div> -->
+                            <div class="col-md-9">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label for="category-id" class="col-form-label">Mã thể loại</label>
+                                            <input type="text" class="form-control" id="category_id" name="category_id">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label for="category-name" class="col-form-label">Tên thể loại</label>
+                                            <input type="text" class="form-control" id="category_name"
+                                                name="category_name">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="category-description" class="col-form-label">Mô tả</label>
+                                    <textarea class="form-control" id="category_description" name="category_description"
+                                        rows="3"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" name="publish-category"
+                                id="publish-category" value="checkedValue" checked>
+                            Hiển thị thể loại
+                        </label>
+                    </div>
+                    <div class="button-group">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                        <button type="button" class="btn btn-primary" onclick="saveCategory()">Thêm thể loại</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/contentScript.js"></script>
+    <!-- <script>
+        fetch('category.json')
+            .then(res => {
+                return res.json();
+            })
+            .then(data => {
+                var items = "";
+                data.map((val, key) => {
+                    return items += `<tr key=${key}>
+                                <td>${val.parent_id}</td>
+                                <td><img src="${val.image}" width="50px" alt="${val.id}"/></td>
+                                <td>${val.name}</td>
+                                <td>${val.description}</td>
+                                <td>${val.status == 0 ? "Hiện" : "Ẩn"}</td>
+                                <td>${convertTime(val.date_added)}</td>
+                                <td>${convertTime(val.last_modified)}</td>
+                                <td><button type="button" name="editCategory" id="editCategory" class="btn btn-primary"><i class="fa fa-pencil" aria-hidden="true"></i></button></td>
+                                <td><button type="button" name="removeCategory" id="removeCategory" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button></td>
+                            </tr>`
+                })
+                document.querySelector('#data-categories').nodeValue = items;
+            })
+            .catch(error => console.error());
+    </script> -->
+</body>
+<script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
+<script>
+    var firebaseConfig = {
+        apiKey: "AIzaSyDMuBZlr0WoXGiSmNgqWscFrq2TzAUyXU0",
+        authDomain: "quanlysanpham-6d800.firebaseapp.com",
+        databaseURL: "https://quanlysanpham-6d800.firebaseio.com",
+        projectId: "quanlysanpham-6d800",
+        storageBucket: "",
+        messagingSenderId: "43084678422",
+        appId: "1:43084678422:web:f71c5f434bce034b"
+    };
+    firebase.initializeApp(firebaseConfig);
+        var matheloai = document.getElementById('category_id').value;
+        var tentheloai = document.getElementById('category_name').value;
+        var mota = document.getElementById('category_description').value;
+
+    var TheLoai = {
+        TheLoai1: {
+            STT: 1,
+            MaTheLoai: 'A001',
+            TenTheLoai: 'Hành động',
+            MoTa: 'ABCCCCCCC',
+        },
+    };
+    var dbConnect = firebase.database().ref('TheLoai/');
+    
+    function writeData(values) {
+        dbConnect.set(values);
+    }
+    function updateData(values) {
+        dbConnect.update(values);
+    }
+    var sttCur = 0;
+    dbConnect.on('value', function (snapshot) {
+        var data = '';
+        if(snapshot.val()){
+            Object.values(snapshot.val()).map((value, key) => {
+                sttCur = key+1;
+            data += `<tr key=${key}>
+            <td>${value.STT}</td>
+            <td>${value.MaTheLoai}</td>
+            <td>${value.TenTheLoai}</td>
+            <td>${value.MoTa}</td>
+            <td>
+                <a href="#" class="btn btn-primary">Sửa</a>
+                <a href="#" class="btn btn-primary">Xóa</a>
+                </td>
+            </tr>`
+        })
+        }
+        
+        document.querySelector('#data-categories').innerHTML = data;
+    });
+    function saveCategory() {
+        var matheloai = document.getElementById('category_id').value;
+        var tentheloai = document.getElementById('category_name').value;
+        var mota = document.getElementById('category_description').value;
+
+        var data = {
+            STT: sttCur+1,
+            MaTheLoai: matheloai,
+            TenTheLoai: tentheloai,
+            MoTa: mota,
+        }
+
+        // var updates = {};
+        // updates['/quanlysanpham/' + Matheloai] = data;
+        // firebase.database.ref().update(updates)
+        dbConnect.push(data);
+        alert("Insert successfull");
+        // reloadPage();
+    }
+</script>
+<script>
+    function logout() {
+        location.replace("../index.html")
+
+    }
+</script>
+<!-- <script>
+    var tbl_list = document.getElementById("tbl_category");
+    var databaseRef = firebase.database.data.ref('quanlysanpham/');
+    var rowIndex = 1;
+
+    databaseRef.once('value', function (snapshot) {
+        snapshot.forEach(function (childSnapshot) {
+            var childKey = childSnapshot.key;
+            var childData = childSnapshot.val();
+
+            var row = tblUsers.insertRow(rowIndex);
+            var cellId = row.insertCell(0);
+            var cellName = row.insertCell(1);
+            cellId.appendChild(document.createTextNode(childKey));
+            cellName.appendChild(document.createTextNode(childData.user_name));
+
+            rowIndex = rowIndex + 1;
+        });
+    });
+
+
+    function saveCategory() {
+        var uid = firebase.database.ref().child('quanlysanpham').push().key;
+        var matheloai = document.getElementById('category_id').value;
+        var tentheloai = document.getElementById('category_name').value;
+        var mota = document.getElementById('category_description').value;
+
+        var data = {
+            id: uid,
+            Matheloai: matheloai,
+            Tentheloai: tentheloai,
+            Mota: mota,
+        }
+        var updates = {};
+        updates['/quanlysanpham/' + Matheloai] = data;
+        firebase.database.ref().update(updates)
+
+        alert("Insert successfull");
+        reloadPage();
+    }
+    function updateCategory() {
+        var matheloai = document.getElementById('category_id').value;
+        var tentheloai = document.getElementById('category_name').value;
+        var mota = document.getElementById('category_description').value;
+        var data = {
+            matheloai: matheloai,
+            tentheloai: tentheloai,
+            mota: mota,
+        }
+
+        var updates = {};
+        updates['/quanlysanpham/' + matheloai] = data;
+        firebase.database.ref().update(updates)
+
+        alert("update successfull");
+        reloadPage();
+
+    }
+    function deleteCategory() {
+        var matheloai = document.getElementById('category_id').value;
+
+        firebase.database.ref().child('/quanlysanpham/' + matheloai).remove();
+        alert("delete successfull");
+        reloadPage();
+    }
+    function reloadPage() {
+        window.location.reload();
+    }
+</script> -->
+
+</html>
